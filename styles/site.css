@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
+* {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.pt-100 {
+    padding-top: 100px;
+}
+
+#greeting {
+    display: inline;
+}
+
+/* Add this class to smooth the transitions */
+My-Emoji {
+    font-size: 50px; /* Don't need this unless you want a large emoji */
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+
+}
+
