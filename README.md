@@ -2,7 +2,8 @@
 
 ### Embed flashing seasonal Emoji's on your website that are season dependent 
 ---
-## To Do:
-* Tooltip
+## Things To Do:
+* Pass in Day into `GetSeason()` method for more specific seasons
+* Tooltips
 * More seasons
   
