@@ -1,22 +1,42 @@
 /*┌────────────────────────────────────────────────┐
  *│                                                │*
- *│ --> Super Sickening Seasonal Emoji Flasher <-- │*
+ *│             --> Emoji Flasher <--              │*
  *│                   * By Dan *                   │*
- *│                     v1.0.1                     │*
+ *│                     v1.0.2                     │*
+ *│                                                │*
+ *│ ---------------------------------------------- │*
+ *│                                                │*
+ *│  TODO:                                         │*    
+ *│   - Unit Tests                                 │*
+ *│   - Date Ranges                                │* 
  *│                                                │*
  *└────────────────────────────────────────────────┘*/
 
 document.addEventListener("DOMContentLoaded", function () {
 
-    
+    // Set the HTML tag
     var emojiTag = document.createElement('my-emoji');
-    var getMonth = getDate();
-    var greeting = getGreeting(getMonth);
-    document.getElementById("greeting").innerHTML = greeting;   
+
+    // Get the day and month
+    var getMonth = getTheMonth();
+    var getDay = getTheDay();
+
+    // Get the season    
+    var getEmoji = getSeason(getDay, getMonth);
+
+    // Check if we have a season ... 
+    if (getEmoji) {
+
+    // Render the emoji and greeting message
+        renderEmoji(getEmoji);
+        showTooltipGreeting(greeting);
+        var greeting = getGreeting(getDay, getMonth);
+        document.getElementById("greeting").innerHTML = greeting; 
+
+    } else {
+        document.getElementById("greeting").innerHTML = "Nothing to celebrate 😐"; 
+    }
     
-    var getEmoji = getSeason(getMonth);
-    renderEmoji(getEmoji);
-    showTooltipGreeting(greeting);
 });
 
 function renderEmoji(emoji) {
@@ -44,7 +64,7 @@ function renderEmoji(emoji) {
 
 }
 
-function getDate() {
+function getTheMonth() {
 
     var date = new Date();
     var month = date.getMonth();
@@ -52,12 +72,23 @@ function getDate() {
     return month;
 }
 
-function getSeason(month) {
+function getTheDay() {
+
+    var date = new Date();
+    var day = date.getDate();
+
+    return day;
+}
+
+function getSeason(day, month) {
 
     var emoji;
 
+
+    // Is it Easter 
+    month == 3 && day == 12 ? emoji = '🐣' : '';
     // Is it Halloween?
-    month == 9 ? emoji = '🎃' : '';
+    month == 9 && day == 31 ? emoji = '🎃' : '';
     // Is it Crimbo?
     month == 11 ? emoji = '🎄' : '';
     // Is it New Year?
@@ -67,12 +98,14 @@ function getSeason(month) {
 
 }
 
-function getGreeting(month) {
-
+function getGreeting(day, month) {
+    
     var greeting;
 
+    // Is it Easter 
+    month == 3 && day == 12 ? greeting = 'Happy Easter!' : '';
     // Is it Halloween?
-    month == 9 ? greeting = 'Happy Halloween!' : '';
+    month == 9 && day == 31 ? greeting = 'Happy Halloween!' : '';
     // Is it Crimbo?
     month == 11 ? greeting = 'Merry Christmas!' : '';
     // Is it New Year?
@@ -88,4 +121,5 @@ function showTooltipGreeting(greeting) {
     document.querySelector('My-Emoji').setAttribute("data-toggle", "tooltip"); 
     document.querySelector('My-Emoji').setAttribute("data-placement", "bottom"); 
     document.querySelector('My-Emoji').setAttribute("title", `${greeting}`);
+
 }
